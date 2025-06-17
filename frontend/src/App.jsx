@@ -46,7 +46,7 @@ function App() {
   ** It updates the component's state with the fetched todos from the API Endpoint '/'.
   */
   useEffect(() => {
-    fetch("http://localhost:8080/").then(response => response.json()).then(data => {
+    fetch("http://localhost:8080/tasks").then(response => response.json()).then(data => {
       setTodos(data);
     });
   }, []);

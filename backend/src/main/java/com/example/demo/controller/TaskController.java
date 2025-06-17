@@ -74,6 +74,7 @@ public class TaskController {
          * taskRepository.deleteById(id);
          * return ResponseEntity.noContent().build()
          */
+        taskRepository.deleteById(id);
         return "redirect:/";
     }
 

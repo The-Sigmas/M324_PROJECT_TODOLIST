@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +43,22 @@ public class TaskController {
     }
 
     @CrossOrigin
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateTask(@PathVariable Long id, @RequestBody Task task) {
+        Optional<Task> t = taskRepository.findById(id);
+
+        if (t.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Task existingTask = t.get();
+        existingTask.setTaskdescription(task.getTaskdescription());
+
+        taskRepository.save(existingTask);
+        return ResponseEntity.ok("Task updated successfully.");
+    }
+
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<String> addTask(@RequestBody Task task) {
         Task t = taskRepository.save(task);
@@ -57,6 +74,7 @@ public class TaskController {
          * taskRepository.deleteById(id);
          * return ResponseEntity.noContent().build()
          */
+        taskRepository.deleteById(id);
         return "redirect:/";
     }
 

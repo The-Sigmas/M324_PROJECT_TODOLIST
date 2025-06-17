@@ -90,4 +90,64 @@ public class TaskControllerTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    @Transactional
+    public void testUpdateTaskSuccessfully() {
+        final String originalDescription = "original task";
+        final String updatedDescription = "updated task";
+
+        try {
+            JSONObject newTask = new JSONObject();
+            newTask.put("taskdescription", originalDescription);
+
+            String response = mockMvc.perform(MockMvcRequestBuilders.post("/tasks")
+                    .content(newTask.toString())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .characterEncoding("utf-8"))
+                    .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                    .andReturn()
+                    .getResponse()
+                    .getContentAsString();
+
+            Long taskId = taskRepository.findAll().get(0).getId();
+
+            JSONObject updatedTask = new JSONObject();
+            updatedTask.put("taskdescription", updatedDescription);
+
+            mockMvc.perform(MockMvcRequestBuilders.put("/tasks/" + taskId)
+                    .content(updatedTask.toString())
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(MockMvcResultMatchers.status().isOk());
+
+            mockMvc.perform(MockMvcRequestBuilders.get("/tasks"))
+                    .andExpect(MockMvcResultMatchers.status().isOk())
+                    .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(updatedDescription)))
+                    .andExpect(MockMvcResultMatchers.content()
+                            .string(Matchers.not(Matchers.containsString(originalDescription))));
+
+        } catch (Exception e) {
+            fail("test failed: " + e.getMessage());
+        }
+    }
+
+    @Test
+    @Transactional
+    public void testUpdateTaskNotFound() {
+        final Long nonexistentId = 9999L;
+        final String updatedDescription = "should not update";
+
+        try {
+            JSONObject updatedTask = new JSONObject();
+            updatedTask.put("taskdescription", updatedDescription);
+
+            mockMvc.perform(MockMvcRequestBuilders.put("/tasks/" + nonexistentId)
+                    .content(updatedTask.toString())
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(MockMvcResultMatchers.status().isNotFound());
+        } catch (Exception e) {
+            fail("Negative test failed unexpectedly: " + e.getMessage());
+        }
+    }
+
 }

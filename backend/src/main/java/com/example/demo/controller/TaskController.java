@@ -52,9 +52,12 @@ public class TaskController {
 
     @CrossOrigin
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-        taskRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public String deleteTask(@PathVariable Long id) {
+        /*
+         * taskRepository.deleteById(id);
+         * return ResponseEntity.noContent().build()
+         */
+        return "redirect:/";
     }
 
 }

@@ -55,11 +55,11 @@ function App() {
  /** Is called when the Done-Button is pressed. It sends a POST request to the API endpoint '/delete' and updates the component's state with the new todo.
   ** In this case if the task with the unique taskdescription is found on the server, it will be removed from the list.
   */
-  const handleDelete = (event, taskdescription) => {
+  const handleDelete = (event, id) => {
     console.log("Sending task description to delete on Spring-Server: "+taskdescription);
-    fetch(`http://localhost:8080/delete`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
-      method: "POST",
-      body: JSON.stringify({ taskdescription: taskdescription }),
+    fetch(`http://localhost:8080/tasks/${id}`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
+      method: "DELETE",
+      //body: JSON.stringify({ taskdescription: taskdescription }),
       headers: {
         "Content-Type": "application/json"
       }
@@ -95,7 +95,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>
-          ToDo Liste
+          The-Sigmas Todo
         </h1>
         <form onSubmit={handleSubmit} className='todo-form'>
           <label htmlFor="taskdescription">Neues Todo anlegen:</label>

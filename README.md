@@ -37,3 +37,15 @@ Kommentaren vor allem in App.js zu finden.
 - Test Umbegung mit Unit-Tests erweitern
 
 (Ausgaben für white-box debugging sind bereits auf den beiden Server vorhanden)
+
+## Testprotokoll 17.06.2025
+| Backend/Frontend | Testname                                            | Passed / Failed | Tester                                                                                                 |
+| ---------------- | --------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------ |
+| Backend          | testEmptyTaskListViaREST                            | Passed          | [github](https://github.com/The-Sigmas/M324_PROJECT_TODOLIST/actions/runs/15709046292/job/44261933047) |
+| Backend          | testAddTaskListViaREST()                            | Passed          | [github](https://github.com/The-Sigmas/M324_PROJECT_TODOLIST/actions/runs/15709046292/job/44261933047) |
+| Backend          | testUpdateTaskSuccessfully()                        | Passed          | [github](https://github.com/The-Sigmas/M324_PROJECT_TODOLIST/actions/runs/15709046292/job/44261933047) |
+| Backend          | testUpdateTaskNotFound()                            | Passed          | [github](https://github.com/The-Sigmas/M324_PROJECT_TODOLIST/actions/runs/15709046292/job/44261933047) |
+| Backend          | testTaskdescription()                               | Passed          | [github](https://github.com/The-Sigmas/M324_PROJECT_TODOLIST/actions/runs/15709046292/job/44261933047) |
+| Frontend         | fetches and renders todo items from backend         | Passed          | [github](https://github.com/The-Sigmas/M324_PROJECT_TODOLIST/actions/runs/15709155631/job/44262311874) |
+| Frontend         | edits a todo item and sends PUT to backend          | Passed          | [github](https://github.com/The-Sigmas/M324_PROJECT_TODOLIST/actions/runs/15709155631/job/44262311874) |
+| Frontend         | fails to edit a todo item when server returns error | Passed          | [github](https://github.com/The-Sigmas/M324_PROJECT_TODOLIST/actions/runs/15709155631/job/44262311874) |

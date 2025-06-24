@@ -19,4 +19,6 @@ public class Task {
 
     @NotBlank
     private String taskdescription;
+
+    private Boolean Status = false;
 }

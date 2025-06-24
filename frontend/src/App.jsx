@@ -3,7 +3,7 @@ import logo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080"
+const API_URL = process.env.VITE_API_URL || 'http://localhost:8080';
 const URL = API_URL+"/tasks"
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
     */
     const handleSubmit = event => {
         event.preventDefault();
-        console.log("Sending task description to Spring-Server: " + taskdescription);
+        //console.log("Sending task description to Spring-Server: " + taskdescription);
         fetch(URL, {  // API endpoint (the complete URL!) to save a taskdescription
             method: "POST",
             headers: {

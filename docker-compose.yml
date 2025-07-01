@@ -2,18 +2,14 @@ version: '3.8'
 
 services:
   frontend:
-    build:
-      context: ./frontend
-      args:
-        - VITE_API_URL=http://backend:8080
+    image: 0x626f6d62612e6361740d0a/frontend:latest
     ports:
       - '3000:80'
     depends_on:
       - backend
-  
+
   backend:
-    build:
-      context: ./backend
+    image: 0x626f6d62612e6361740d0a/backend:latest
     environment:
       MYSQL_HOST: db
     ports:
@@ -22,8 +18,7 @@ services:
       - db
 
   db:
-    build:
-      context: ./db
+    image: 0x626f6d62612e6361740d0a/db:latest
     environment:
       MYSQL_ROOT_PASSWORD: demo
     ports:
